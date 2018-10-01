@@ -3,3 +3,7 @@ build
 .idea
 *.iml
 ci/variables.yml
+gradlew
+gradlew.bat
+gradle/
+.DS_Store
