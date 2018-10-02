@@ -32,16 +32,9 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-    public Long delete(Long id)
+    public void delete(Long id)
     {
-        Long returnValue = null;
-
-        if (TIME_ENTRY_MAP.keySet().contains(id)) {
-            TIME_ENTRY_MAP.remove(id);
-            returnValue = id;
-        }
-
-        return returnValue;
+        TIME_ENTRY_MAP.remove(id);
     }
 
     @Override
