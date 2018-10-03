@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.TimeZone;
@@ -32,12 +33,15 @@ public class TimeEntryApiTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    DataSource dataSource;
+
     private TimeEntry timeEntry = new TimeEntry(123L, 456L, LocalDate.parse("2017-01-08"), 8);
 
     @Before
     public void setUp() throws Exception {
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUrl(System.getenv("SPRING_DATASOURCE_URL"));
+        //MysqlDataSource dataSource = new MysqlDataSource();
+        //dataSource.setUrl(System.getenv("SPRING_DATASOURCE_URL"));
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.execute("TRUNCATE time_entries");

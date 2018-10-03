@@ -7,5 +7,8 @@ applications:
   disk_quota: 256M
   buildpacks:
     - java_buildpack
+  services:
+    - tracker-database
   env:
+    MANAGEMENT_SECURITY_ENABLED: false
     WELCOME_MESSAGE: Hello from the review environment
