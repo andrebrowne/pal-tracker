@@ -1,0 +1,14 @@
+applications:
+- name: pal-tracker
+  path: build/libs/pal-tracker.jar
+  routes:
+    - route: pal-tracker-56F6F27F-4093-44AE-A674-0C982F7E1C96-dev.cfapps.io
+  memory: 768M
+  disk_quota: 256M
+  buildpacks:
+    - java_buildpack
+  services:
+    - tracker-database
+  env:
+    MANAGEMENT_SECURITY_ENABLED: false
+    WELCOME_MESSAGE: hello

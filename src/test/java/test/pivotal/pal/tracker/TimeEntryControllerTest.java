@@ -5,6 +5,8 @@ import io.pivotal.pal.tracker.TimeEntryController;
 import io.pivotal.pal.tracker.TimeEntryRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,13 +20,21 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 public class TimeEntryControllerTest {
+    private CounterService counterService;
+    private GaugeService gaugeService;
     private TimeEntryRepository timeEntryRepository;
     private TimeEntryController controller;
 
     @Before
     public void setUp() throws Exception {
+        counterService = mock(CounterService.class);
+        gaugeService = mock(GaugeService.class);
         timeEntryRepository = mock(TimeEntryRepository.class);
-        controller = new TimeEntryController(timeEntryRepository);
+        controller = new TimeEntryController(
+                timeEntryRepository,
+                counterService,
+                gaugeService
+        );
     }
 
     @Test
