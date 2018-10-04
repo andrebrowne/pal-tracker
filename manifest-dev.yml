@@ -10,5 +10,5 @@ applications:
   services:
     - tracker-database
   env:
-    MANAGEMENT_SECURITY_ENABLED: false
+    MANAGEMENT_SECURITY_ENABLED: true
     WELCOME_MESSAGE: hello
