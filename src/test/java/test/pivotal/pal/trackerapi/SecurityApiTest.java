@@ -20,20 +20,20 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(classes = PalTrackerApplication.class, webEnvironment = RANDOM_PORT)
 public class SecurityApiTest {
 
-    @LocalServerPort
-    private String port;
-    private TestRestTemplate authorizedRestTemplate;
-
     @Autowired
     private TestRestTemplate unAuthorizedRestTemplate;
+
+    @LocalServerPort
+    protected String port;
+    protected TestRestTemplate restTemplate;
 
     @Before
     public void setUp() throws Exception {
         RestTemplateBuilder builder = new RestTemplateBuilder()
-            .rootUri("http://localhost:" + port)
-            .basicAuthorization("user", "password");
+                .rootUri("http://localhost:" + port)
+                .basicAuthorization("user", "password");
 
-        authorizedRestTemplate = new TestRestTemplate(builder);
+        restTemplate = new TestRestTemplate(builder);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SecurityApiTest {
 
     @Test
     public void authorizedTest() {
-        ResponseEntity<String> response = this.authorizedRestTemplate.getForEntity("/", String.class);
+        ResponseEntity<String> response = this.restTemplate.getForEntity("/", String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
